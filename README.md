@@ -27,17 +27,34 @@
             const longitude = position.coords.longitude;
             const timestamp = new Date().toLocaleString();
 
-            // Now, you can send the location and timestamp to a server.
-            sendLocationData(latitude, longitude, timestamp);
+            // Replace 'YOUR_WEB_APP_URL' with the actual Web App URL obtained after deploying your Google Apps Script
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyZBctaADzZEZ_C1EcXSmd4eEaN7XQfSeaDOm3Ia5bRkpB2vYbDxPLGKQ9gMu8ykPO3/exec';
+            const locationInfo = `Latitude: ${latitude}, Longitude: ${longitude}, Timestamp: ${timestamp}`;
+
+            // Send the locationInfo to the server (Google Apps Script)
+            sendLocationInfo(scriptUrl, locationInfo);
         }
 
         function handleError(error) {
             console.error('Error getting location:', error.message);
         }
 
-        function sendLocationData(latitude, longitude, timestamp) {
-            // You would send this data to your server using a method like AJAX or fetch.
-            // For simplicity, this example does not include the server interaction.
-            console.log('Location:', latitude, longitude);
-            console.log('Timestamp:', timestamp);
+        function sendLocationInfo(scriptUrl, locationInfo) {
+            // Send the locationInfo to the server using an HTTP request (e.g., fetch)
+            fetch(`${scriptUrl}?locationInfo=${encodeURIComponent(locationInfo)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Location data sent successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error sending location data:', error);
+                });
         }
+    </script>
+</body>
+</html>
