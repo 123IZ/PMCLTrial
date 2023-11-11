@@ -12,12 +12,6 @@
     <button id="getLocation">Get Location</button>
 
     <script>
-        // Function to extract employee ID from the URL
-        function getEmployeeId() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('employeeId');
-        }
-
         document.getElementById('getLocation').addEventListener('click', getLocation);
 
         function getLocation() {
@@ -34,8 +28,9 @@
             const timestamp = new Date().toLocaleString();
 
             const employeeId = getEmployeeId();
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxGV1uOcMaeqOU9gmasgLp3ClKimC113RsjbCLAUSRNZBC0brlXx9tVY7wjMcNlFUXO/exec'; // Replace with your actual Web App URL
-            const locationInfo = `Employee ID: ${employeeId}, Latitude: ${latitude}, Longitude: ${longitude}, Timestamp: ${timestamp}`;
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbwCPCZy2v9FimFam5qLa09WfNvS05iFtBP059q_Bp2VTi-aDVPVJO919nGB1k-4OGw/exec';
+
+            const locationInfo = `employeeId=${employeeId}&latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`;
 
             // Send the locationInfo to the server (Google Apps Script)
             sendLocationInfo(scriptUrl, locationInfo);
@@ -47,7 +42,7 @@
 
         function sendLocationInfo(scriptUrl, locationInfo) {
             // Send the locationInfo to the server using an HTTP request (e.g., fetch)
-            fetch(`${scriptUrl}?locationInfo=${encodeURIComponent(locationInfo)}`)
+            fetch(`${scriptUrl}?${locationInfo}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -60,6 +55,12 @@
                 .catch(error => {
                     console.error('Error sending location data:', error);
                 });
+        }
+
+        function getEmployeeId() {
+            // You can define your logic to get the employee ID, for example, from a form input.
+            // For demonstration purposes, returning a placeholder value.
+            return '123';
         }
     </script>
 </body>
