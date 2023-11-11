@@ -27,9 +27,11 @@
             const longitude = position.coords.longitude;
             const timestamp = new Date().toLocaleString();
 
-            const employeeId = getEmployeeId();
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbwCPCZy2v9FimFam5qLa09WfNvS05iFtBP059q_Bp2VTi-aDVPVJO919nGB1k-4OGw/exec';
+            // You can dynamically set the employeeId or retrieve it from a form input
+            const employeeId = '123';
 
+            // Construct the URL with the parameters
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzzHJgdrIFvbJHyucFrCC-Qq5lVMlGUVAEu9pJeKuERtan1igDbYH-KQXQagjUAXuVv/exec';
             const locationInfo = `employeeId=${employeeId}&latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`;
 
             // Send the locationInfo to the server (Google Apps Script)
@@ -56,12 +58,7 @@
                     console.error('Error sending location data:', error);
                 });
         }
-
-        function getEmployeeId() {
-            // You can define your logic to get the employee ID, for example, from a form input.
-            // For demonstration purposes, returning a placeholder value.
-            return '123';
-        }
     </script>
 </body>
 </html>
+
