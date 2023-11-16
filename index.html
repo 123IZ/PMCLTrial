@@ -29,7 +29,7 @@
             // Fetch the employee ID from the Google Sheet based on some criteria
             fetchEmployeeId().then(employeeId => {
                 // Construct the URL with the parameters
-                const scriptUrl = 'https://script.google.com/macros/s/AKfycbyVMyhARRxTaJxUpzlntuZCiHyZR1e3atuymITiGBMZ9xzS94kT3nzVHN3h1EYu0KIC/exec';
+                const scriptUrl = 'https://script.google.com/macros/s/AKfycbz91lEmxdwO0NRsjN4INSPZcpBJFDPHIUlbogvbTx7YwF3kg4I44R-HCBfQO7zZIocK/exec';
                 const locationInfo = `employeeId=${employeeId}&latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`;
 
                 // Send the locationInfo to the server (Google Apps Script)
@@ -45,7 +45,7 @@
 
         function fetchEmployeeId() {
             // Replace this URL with your Google Apps Script endpoint for fetching the employee ID
-            const employeeIdUrl = 'https://script.google.com/macros/s/AKfycbyVMyhARRxTaJxUpzlntuZCiHyZR1e3atuymITiGBMZ9xzS94kT3nzVHN3h1EYu0KIC/exec';
+            const employeeIdUrl = 'https://script.google.com/macros/s/AKfycbz91lEmxdwO0NRsjN4INSPZcpBJFDPHIUlbogvbTx7YwF3kg4I44R-HCBfQO7zZIocK/exec';
 
             // Replace 'criteria' with the actual criteria for fetching the employee ID (e.g., name, email)
             const criteria = 'PMC-0013';
