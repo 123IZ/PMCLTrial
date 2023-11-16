@@ -26,38 +26,18 @@
             const longitude = position.coords.longitude;
             const timestamp = new Date().toLocaleString();
 
-            // Fetch the employee ID from the Google Sheet based on some criteria
-            fetchEmployeeId().then(employeeId => {
-                // Construct the URL with the parameters
-                const scriptUrl = 'https://script.google.com/macros/s/AKfycbz91lEmxdwO0NRsjN4INSPZcpBJFDPHIUlbogvbTx7YwF3kg4I44R-HCBfQO7zZIocK/exec';
-                const locationInfo = `employeeId=${employeeId}&latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`;
+            // Replace 'YOUR_WEB_APP_URL' with the actual URL of your deployed Google Apps Script web app
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxQyTkFDEBsp68a4Eq4rnEAeRYRJqQPM2C0zQlti7OuCanDwx7riYKjZBWPm1Z4B1n5/exec';
+            
+            // Construct the URL with the parameters
+            const locationInfo = `EmployeeID=PMC-0013&latitude=${latitude}&longitude=${longitude}&timestamp=${timestamp}`;
 
-                // Send the locationInfo to the server (Google Apps Script)
-                sendLocationInfo(scriptUrl, locationInfo);
-            }).catch(error => {
-                console.error('Error fetching employee ID:', error);
-            });
+            // Send the locationInfo to the server (Google Apps Script)
+            sendLocationInfo(scriptUrl, locationInfo);
         }
 
         function handleError(error) {
             console.error('Error getting location:', error.message);
-        }
-
-        function fetchEmployeeId() {
-            // Replace this URL with your Google Apps Script endpoint for fetching the employee ID
-            const employeeIdUrl = 'https://script.google.com/macros/s/AKfycbz91lEmxdwO0NRsjN4INSPZcpBJFDPHIUlbogvbTx7YwF3kg4I44R-HCBfQO7zZIocK/exec';
-
-            // Replace 'criteria' with the actual criteria for fetching the employee ID (e.g., name, email)
-            const criteria = 'PMC-0013';
-
-            // Make a request to fetch the employee ID based on the criteria
-            return fetch(`${employeeIdUrl}?criteria=${criteria}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                });
         }
 
         function sendLocationInfo(scriptUrl, locationInfo) {
